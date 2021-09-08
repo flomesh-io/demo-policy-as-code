@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    "helm.sh/hook": test-failure
+  labels:
+    run: hello-world
+  name: hello-world-bad-tag
+  namespace: default
+spec:
+  containers:
+  - image: docker.io/library/hello-world:latest
+    name: hello-world
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}

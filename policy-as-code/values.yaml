@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 namespace: pipy
 replicaCount: 1
-tag: "latest"
+tag: "0.8.0-31"
 port: 6443
 gui:
   enabled: false

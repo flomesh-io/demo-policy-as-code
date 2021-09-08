@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    "helm.sh/hook": test-failure
+  labels:
+    run: hello-world
+  name: hello-world-bag-registry
+  namespace: default
+spec:
+  containers:
+    - image: hello-world:linux
+      name: hello-world
+      resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
