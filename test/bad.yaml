@@ -9,7 +9,7 @@ metadata:
   namespace: default
 spec:
   containers:
-    - image: hello-world:linux
+    - image: 192.168.64.1:5000/hello-world:linux
       name: hello-world
       resources: {}
   dnsPolicy: ClusterFirst
