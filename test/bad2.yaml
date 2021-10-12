@@ -11,6 +11,7 @@ spec:
   containers:
   - image: docker.io/library/hello-world:latest
     name: hello-world
+    imagePullPolicy: IfNotPresent
     resources: {}
   dnsPolicy: ClusterFirst
   restartPolicy: Never
