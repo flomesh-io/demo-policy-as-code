@@ -1,22 +1,9 @@
-pipy({
-    _validRepoPrefixes: [
-      'docker.io',
-      'k8s.gcr.io'
-    ],
-    _invalidTagSuffixes: [
-      ':latest'
-    ],
+((config, p) => (
+  p = pipy({
+    _validRepoPrefixes: config.validRepoPrefixes,
+    _invalidTagSuffixes: config.invalidTagSuffixes,
   })
-  
-  .listen(os.env.LISTENING_PORT || 6443)
-    .acceptTLS('tls-offloaded', {
-      certificate: {
-        cert: new crypto.Certificate(os.readFile('/certs/tls.crt')),
-        key: new crypto.PrivateKey(os.readFile('/certs/tls.key')),
-      }
-    })
-
-  .pipeline('tls-offloaded')
+  .pipeline('process')
     .decodeHTTPRequest()
     .replaceMessage(
       (msg, req, result, invalids, reason) => (
@@ -73,4 +60,19 @@ pipy({
           
       )
     )
-    .encodeHTTPResponse()
+    .encodeHTTPResponse(),
+  os.stat('/certs/tls.crt') != undefined ? (
+    p.listen(os.env.LISTENING_PORT || 6443)
+      .acceptTLS('process', {
+        certificate: {
+          cert: new crypto.Certificate(os.readFile('/certs/tls.crt')),
+          key: new crypto.PrivateKey(os.readFile('/certs/tls.key')),
+        }
+      })
+    ):(
+    p.listen(os.env.LISTENING_PORT || 6443)
+      .link('process')
+    ),
+  p
+)
+)(JSON.decode(pipy.load('config.json')))

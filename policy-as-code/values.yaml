@@ -3,11 +3,11 @@
 # Declare variables to be passed into your templates.
 namespace: pipy
 replicaCount: 1
-tag: "0.8.0-31"
+tag: "0.4.0-226"
 port: 6443
 gui:
   enabled: false
   port: 6060
 logLevel: info 
 
-scriptURL: "http://192.168.1.101:9999/rule/image.js"  
+scriptURL: "http://pipy-repo.pipy.svc:6060/repo/image-verify/"  

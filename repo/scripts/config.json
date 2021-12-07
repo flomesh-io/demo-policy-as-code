@@ -1,0 +1,9 @@
+{
+  "validRepoPrefixes": [
+    "docker.io",
+    "k8s.gcr.io"
+  ],
+  "invalidTagSuffixes": [
+    ":latest"
+  ]
+}

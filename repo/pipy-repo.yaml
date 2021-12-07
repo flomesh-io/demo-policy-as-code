@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: null
+  name: pipy
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: pipy-repo
+  name: pipy-repo
+  namespace: pipy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pipy-repo
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: pipy-repo
+    spec:
+      containers:
+      - image: flomesh/pipy-pjs:0.4.0-226
+        name: pipy-pjs
+        resources: {}
+        ports:
+        - containerPort: 6060
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: pipy-repo
+  name: pipy-repo
+spec:
+  ports:
+  - nodePort: 30060
+    port: 6060
+    protocol: TCP
+    targetPort: 6060
+  selector:
+    app: pipy-repo
+  type: NodePort        
