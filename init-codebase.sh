@@ -11,9 +11,9 @@ version=$(( version+1 ))
 #create repo
 curl -X POST http://$REPO_HOST/api/v1/repo/$REPO_NAME
 #main
-curl -X POST http://$REPO_HOST/api/v1/repo/$REPO_NAME/main.js --data-binary '@./scripts/main.js'
+curl -X POST http://$REPO_HOST/api/v1/repo/$REPO_NAME/main.js --data-binary '@./repo/scripts/main.js'
 #config
-curl -X POST http://$REPO_HOST/api/v1/repo/$REPO_NAME/config.json --data-binary '@./scripts/config.json'
+curl -X POST http://$REPO_HOST/api/v1/repo/$REPO_NAME/config.json --data-binary '@./repo/scripts/config.json'
 
 #release
 curl -X POST http://$REPO_HOST/api/v1/repo/$REPO_NAME --data '{"version": '$version'}'
