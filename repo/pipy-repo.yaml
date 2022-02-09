@@ -38,6 +38,7 @@ metadata:
   labels:
     app: pipy-repo
   name: pipy-repo
+  namespace: pipy
 spec:
   ports:
   - nodePort: 30060
